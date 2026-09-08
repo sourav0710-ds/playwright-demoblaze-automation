@@ -1,7 +1,15 @@
-import { test, expect } from "@playwright/test";
+import { test } from '@playwright/test';
 
-test("Verify DemoBlaze login", async ({ page }) => {
-    await page.goto("https://www.demoblaze.com/");
+test('Login Test', async ({ page }) => {
 
-    await expect(page.locator("#login2")).toBeVisible();
+    await page.goto('https://www.demoblaze.com/');
+
+    await page.getByRole('link', { name: 'Log in' }).click();
+
+    await page.locator('#loginusername').fill('demoblaze');
+
+    await page.locator('#loginpassword').fill('demoblaze');
+
+    await page.getByRole('button', { name: 'Log in' }).click();
+
 });
