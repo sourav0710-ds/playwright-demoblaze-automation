@@ -1,0 +1,47 @@
+{
+  "info": {
+    "_postman_id": "fa7fdf83-b23b-4605-b406-3421fe198915",
+    "name": "DemoBlaze E-Commerce API Testing",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "57142824",
+    "_collection_link": "https://go.postman.co/collection/57142824-fa7fdf83-b23b-4605-b406-3421fe198915?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Products",
+      "item": [
+        {
+          "name": "New Request",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Product data is available\", function () {\r\n    const response = pm.response.json();\r\n    pm.expect(response.Items.length).to.be.above(0);\r\n});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "https://api.demoblaze.com/entries",
+              "protocol": "https",
+              "host": [
+                "api",
+                "demoblaze",
+                "com"
+              ],
+              "path": [
+                "entries"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
