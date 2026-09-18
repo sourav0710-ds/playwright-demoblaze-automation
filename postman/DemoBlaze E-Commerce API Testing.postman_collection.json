@@ -11,7 +11,7 @@
       "name": "Products",
       "item": [
         {
-          "name": "New Request",
+          "name": "Get All Products",
           "event": [
             {
               "listen": "test",
@@ -42,6 +42,46 @@
           "response": []
         }
       ]
+    },
+    {
+      "name": "Get Products By Category",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Status code is 200\", function () {\r\n    pm.response.to.have.status(200);\r\n});\r\n\r\npm.test(\"Response contains products\", function () {\r\n    const response = pm.response.json();\r\n    pm.expect(response.Items.length).to.be.above(0);\r\n});\r\n\r\npm.test(\"Products belong to phone category\", function () {\r\n    const response = pm.response.json();\r\n\r\n    response.Items.forEach(function(product) {\r\n        pm.expect(product.cat).to.eql(\"phone\");\r\n    });\r\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"cat\": \"phone\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.demoblaze.com/bycat",
+          "protocol": "https",
+          "host": [
+            "api",
+            "demoblaze",
+            "com"
+          ],
+          "path": [
+            "bycat"
+          ]
+        }
+      },
+      "response": []
     }
   ]
 }
